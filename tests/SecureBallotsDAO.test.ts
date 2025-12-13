@@ -1,6 +1,6 @@
 
 import { describe, expect, it, beforeEach } from "vitest";
-import { Cl } from "@stacks/transactions";
+import { Cl } from "@hirosystems/clarinet-sdk/node_modules/@stacks/transactions";
 
 const accounts = simnet.getAccounts();
 const deployer = accounts.get("deployer")!;
@@ -34,7 +34,7 @@ describe("SecureBallotsDAO Test Suite", () => {
       const { result } = simnet.callPublicFn(
         "SecureBallotsDAO",
         "add-voter",
-        [Cl.principal(wallet1)],
+  [Cl.principal(wallet1)],
         deployer
       );
       expect(result).toBeOk(Cl.bool(true));
@@ -44,7 +44,7 @@ describe("SecureBallotsDAO Test Suite", () => {
       const { result } = simnet.callPublicFn(
         "SecureBallotsDAO",
         "add-voter",
-        [Cl.principal(wallet2)],
+  [Cl.principal(wallet2)],
         wallet1
       );
       expect(result).toBeErr(Cl.uint(100)); // ERR_NOT_AUTHORIZED
@@ -52,9 +52,9 @@ describe("SecureBallotsDAO Test Suite", () => {
 
     it("allows batch adding voters", () => {
       const voters = Cl.list([
-        Cl.principal(wallet1),
-        Cl.principal(wallet2),
-        Cl.principal(wallet3),
+  Cl.principal(wallet1),
+  Cl.principal(wallet2),
+  Cl.principal(wallet3),
       ]);
 
       const { result } = simnet.callPublicFn(
@@ -71,7 +71,7 @@ describe("SecureBallotsDAO Test Suite", () => {
       simnet.callPublicFn(
         "SecureBallotsDAO",
         "add-voter",
-        [Cl.principal(wallet1)],
+  [Cl.principal(wallet1)],
         deployer
       );
 
@@ -79,7 +79,7 @@ describe("SecureBallotsDAO Test Suite", () => {
       const { result } = simnet.callPublicFn(
         "SecureBallotsDAO",
         "set-voter-weight",
-        [Cl.principal(wallet1), Cl.uint(5)],
+  [Cl.principal(wallet1), Cl.uint(5)],
         deployer
       );
       expect(result).toBeOk(Cl.bool(true));
@@ -88,7 +88,7 @@ describe("SecureBallotsDAO Test Suite", () => {
       const weight = simnet.callReadOnlyFn(
         "SecureBallotsDAO",
         "get-voter-weight",
-        [Cl.principal(wallet1)],
+  [Cl.principal(wallet1)],
         deployer
       );
       expect(weight.result).toBeUint(5);
@@ -99,7 +99,7 @@ describe("SecureBallotsDAO Test Suite", () => {
       simnet.callPublicFn(
         "SecureBallotsDAO",
         "add-voter",
-        [Cl.principal(wallet1)],
+  [Cl.principal(wallet1)],
         deployer
       );
 
@@ -107,7 +107,7 @@ describe("SecureBallotsDAO Test Suite", () => {
       const { result } = simnet.callPublicFn(
         "SecureBallotsDAO",
         "remove-voter",
-        [Cl.principal(wallet1)],
+  [Cl.principal(wallet1)],
         deployer
       );
       expect(result).toBeOk(Cl.bool(true));
