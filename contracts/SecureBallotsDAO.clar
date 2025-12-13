@@ -268,6 +268,7 @@
 ;; Batch add voters
 (define-public (batch-add-voters (voters (list 50 principal)))
     (begin
+    
         (asserts! (is-eq tx-sender CONTRACT_OWNER) ERR_NOT_AUTHORIZED)
         (ok (map add-voter-internal voters))
     )
