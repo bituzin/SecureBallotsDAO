@@ -275,10 +275,12 @@
 
 (define-private (add-voter-internal (voter principal))
     (if (is-none (index-of (var-get valid-voters) voter))
-        (var-set valid-voters (unwrap-panic (as-max-len? (append (var-get valid-voters) voter) u1000)))
+        (begin
+            (var-set valid-voters (unwrap-panic (as-max-len? (append (var-get valid-voters) voter) u1000)))
+            true
+        )
         false
     )
-    true
 )
 
 ;; Remove a voter
