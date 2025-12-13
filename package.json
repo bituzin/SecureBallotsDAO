@@ -1,8 +1,7 @@
-
 {
-  "name": "SecureBallotsDAO-tests",
-  "version": "1.0.0",
-  "description": "Run unit tests on this project.",
+  "name": "secureballotsdao",
+  "version": "2.0.0",
+  "description": "Professional-grade DAO voting system with Clarity 4 support",
   "type": "module",
   "private": true,
   "scripts": {
@@ -13,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hirosystems/clarinet-sdk": "^2.3.2",
+    "@stacks/clarinet-sdk": "^3.10.0",
     "@stacks/transactions": "^6.12.0",
     "chokidar-cli": "^3.0.0",
     "typescript": "^5.3.3",
