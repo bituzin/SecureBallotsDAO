@@ -1,14 +1,14 @@
 [project]
 name = 'SecureBallotsDAO'
-description = ''
+description = 'Professional-grade DAO voting system with weighted voting, commit-reveal scheme, and Clarity 4 features'
 authors = []
 telemetry = true
 cache_dir = '.\.cache'
 requirements = []
 [contracts.SecureBallotsDAO]
 path = 'contracts/SecureBallotsDAO.clar'
-clarity_version = 3
-epoch = 3.0
+clarity_version = 4
+epoch = 3.3
 [repl.analysis]
 passes = ['check_checker']
 
