@@ -69,6 +69,12 @@
 ;; List of valid voters
 (define-data-var valid-voters (list 1000 principal) (list))
 
+;; Map: voter -> list of proposal-ids (historia głosowań)
+(define-map voter-votes
+    principal
+    (list 1000 uint)
+)
+
 ;; ========================================
 ;; Read-Only Functions
 ;; ========================================
@@ -364,14 +370,26 @@
             {voter: tx-sender, proposal-id: proposal-id}
             {weight: weight, committed: true, timestamp: current-time}
         )
-        
+
+        ;; Update voter-votes map (historia głosowań)
+        (let (
+            (current (default-to (list) (map-get? voter-votes tx-sender)))
+            (updated (unwrap-panic (as-max-len? (append current proposal-id) u1000)))
+        )
+            (map-set voter-votes tx-sender updated)
+        )
+
         ;; Update vote count
         (map-set proposals
             proposal-id
             (merge proposal {vote-count: (+ (get vote-count proposal) weight)})
         )
-        
+
         (ok true)
+    ;; Read-only: get all proposal-ids voted by a user
+    (define-read-only (get-user-votes (voter principal))
+        (default-to (list) (map-get? voter-votes voter))
+    )
     )
 )
 
